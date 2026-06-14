@@ -12,6 +12,7 @@ import authRoutes from './routes/authRoutes.js';
 import commentRoutes from './routes/commentRoutes.js';
 import searchRoutes from './routes/searchRoutes.js';
 import storeRoutes from './routes/storeRoutes.js';
+import chatRoutes from './routes/chatRoutes.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -37,6 +38,12 @@ const authLimiter = rateLimit({
   message: { message: 'Too many attempts, please try again later' }
 });
 
+const chatLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 30,
+  message: { message: 'Too many chat messages. Please wait a few minutes or use WhatsApp.' }
+});
+
 app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok', service: 'vj-fashions-api' });
 });
@@ -46,6 +53,7 @@ app.use('/api/products/search', searchRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/comments', commentRoutes);
 app.use('/api/store', storeRoutes);
+app.use('/api/chat', chatLimiter, chatRoutes);
 
 app.use((err, _req, res, _next) => {
   logger.error(err.message, { stack: err.stack });

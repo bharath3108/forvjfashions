@@ -102,6 +102,8 @@ Until the index is ready, search falls back to regex automatically.
 | GET | `/api/auth/user/verify?token=` | Public |
 | POST | `/api/comments/product/:id` | Verified user |
 | GET | `/api/store` | Public |
+| GET | `/api/chat/status` | Public |
+| POST | `/api/chat` | Public (rate limited) |
 
 ## Store placeholders
 

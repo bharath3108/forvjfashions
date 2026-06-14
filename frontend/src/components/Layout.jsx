@@ -1,5 +1,6 @@
 import Navbar from './Navbar.jsx';
 import Footer from './Footer.jsx';
+import ChatWidget from './ChatWidget.jsx';
 
 export default function Layout({ children }) {
   return (
@@ -7,6 +8,7 @@ export default function Layout({ children }) {
       <Navbar />
       <main className="flex-1">{children}</main>
       <Footer />
+      <ChatWidget />
     </div>
   );
 }

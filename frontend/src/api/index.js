@@ -37,3 +37,7 @@ export const uploadImage = (file) => {
     headers: { 'Content-Type': 'multipart/form-data' }
   });
 };
+
+export const getChatStatus = () => client.get('/chat/status');
+export const sendChatMessage = (message, history = []) =>
+  client.post('/chat', { message, history });
